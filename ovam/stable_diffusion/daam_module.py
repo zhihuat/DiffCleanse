@@ -79,6 +79,11 @@ class StableDiffusionDAAM(DAAMModule):
         torch.Tensor
             The attention heatmaps. Shape: (n_images, n_tokens, block_latent_size[0], block_latent_size[1])
         """
+        
+        if isinstance(x, (str, list)):
+            # Encode text
+            x = self.encode_text(x, remove_special_tokens=remove_special_tokens)
+            
         attention = []
         for block in self.blocks.values():
             attention.append(block.forward(x))

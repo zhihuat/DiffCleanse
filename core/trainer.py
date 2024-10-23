@@ -44,6 +44,7 @@ from core.utils import add_target, normalize
 from core.pipeline_stable_diffusion_grad import StableDiffusionPipelineGrad
 from ovam import StableDiffusionHooker # actually is StableDiffusionHookerSA
 
+os.environ["WANDB_API_KEY"] = 'c5dbad0515774cb5358865ceabedf4a4bf8be9c3'
 
 if version.parse(version.parse(PIL.__version__).base_version) >= version.parse("9.1.0"):
     PIL_INTERPOLATION = {
@@ -350,7 +351,7 @@ class Trainer:
         print(f"Update steps per epoch: {self.num_update_steps_per_epoch}")
         print(f"Num batches in dataloader: {len(self.train_dataloader)}")
         
-        pipeline_with_grad = StableDiffusionPipelineGrad.from_pretrained(
+        pipeline_with_grad = StableDiffusionPipeline.from_pretrained(
                                 self.opts.pretrained_model,
                                 text_encoder=self.text_encoder,
                                 vae=self.vae,
@@ -412,7 +413,7 @@ class Trainer:
                     # Evaluate the attention map with the word cat and the optimized embedding
                     with torch.enable_grad():
                         ovam_evaluator = hooker.get_ovam_callable()
-                        optimized_map = ovam_evaluator([1] * self.opts.train_batch_size) # [1] # (64, 64)
+                        optimized_map = ovam_evaluator(['sks'] * self.opts.train_batch_size) # [1] # (64, 64)
                     
                     interested_attn_map = optimized_map[:self.opts.train_batch_size//2]
                     negative_attn_map = optimized_map[self.opts.train_batch_size//2:]

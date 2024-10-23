@@ -1,7 +1,8 @@
 pretrained_model = "/home/guest/zsf/Pretrained_model_files/sd_v1-4/" # Pretrained model signature or path
 pretrained_unet = "/home/guest/zsf/tzh/BadT2I/bd_models/laion_pixel_boya_unet_bsz16" # Pretrained unet signature or path
 tokenizer_name = None # If using a different tokenizer
-train_data_dir = "/home/guest/zsf/Datasets/coco2014train/train2014" # Path to training data
+train_data_dir = "/home/guest/zsf/tzh/BadT2I/datasets/laion_dogcat_500/train"
+# "/home/guest/zsf/Datasets/coco2014train/train2014" # Path to training data
 placeholder_token_count = 1 # Number of triggers
 initializer_tokens = "sks" # If provided initializing tokens from these
 repeats = 1 # How many times to repeat the training data

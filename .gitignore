@@ -1,0 +1,6 @@
+/wandb
+/outputs
+__pycache__/
+./*.pyc
+**/**/__pycache__/
+**/__pycache__/

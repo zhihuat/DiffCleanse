@@ -5,7 +5,7 @@ import torch
 __all__ = ["encode_text"]
 
 
-@torch.no_grad()
+@torch.enable_grad()
 def encode_text(
     tokenizer,
     text_encoder,
@@ -44,7 +44,7 @@ def encode_text(
 
     # Discard special tokens (<SOT>, <EOT>)
     if remove_special_tokens:
-        text_embeddings = text_embeddings[1:-1, :]
+        text_embeddings = text_embeddings[:, 1:-1, :]
 
     # Discard tokens that are not in the text
     if text != context_sentence:
